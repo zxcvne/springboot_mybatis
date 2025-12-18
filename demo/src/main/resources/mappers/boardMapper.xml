@@ -7,4 +7,7 @@
     insert into board(title, writer, content)
     values(#{title}, #{writer}, #{content})
 </insert>
+    <select id="getList" resultType="com.example.demo.domain.BoardVO">
+        select * from board order by bno desc limit 10;
+    </select>
 </mapper>

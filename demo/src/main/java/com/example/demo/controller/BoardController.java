@@ -5,9 +5,12 @@ import com.example.demo.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RequestMapping("/board/*")
@@ -21,9 +24,12 @@ public class BoardController {
 
     @PostMapping("/register")
     public String register(BoardVO boardVO){
-        int isOk = boardService.insert(boardVO);
-        log.info(">>> insert >> {}", (isOk > 0)? "ok" : "fail");
-
-        return "index";
+        boardService.insert(boardVO);
+        return "redirect:/board/list";
+    }
+    @GetMapping("/list")
+    public void list(Model model) {
+        List<BoardVO> list = boardService.getList();
+        model.addAttribute("list", list);
     }
 }
