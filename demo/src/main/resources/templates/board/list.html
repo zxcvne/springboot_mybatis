@@ -20,10 +20,10 @@
             <tbody>
             <tr th:each="board : ${list}">
                 <th scope="row">[[${board.bno}]]</th>
-                <td>[[${board.title}]]</td>
+                <td><a th:href="@{/board/detail(bno=${board.bno})}">[[${board.title}]]</a></td>
                 <td>[[${board.writer}]]</td>
-                <td>@[[${board.regDate}]]</td>
-                <td>@[[${board.readCount}]]</td>
+                <td>[[${board.regDate}]]</td>
+                <td>[[${board.readCount}]]</td>
             </tr>
             </tbody>
         </table>

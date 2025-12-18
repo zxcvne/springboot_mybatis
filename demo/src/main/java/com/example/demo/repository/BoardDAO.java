@@ -9,4 +9,6 @@ import java.util.List;
 public interface BoardDAO {
     void insert(BoardVO boardVO);
     List<BoardVO> getList();
+
+    BoardVO getDetail(long bno);
 }

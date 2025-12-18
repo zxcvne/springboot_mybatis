@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -31,5 +32,11 @@ public class BoardController {
     public void list(Model model) {
         List<BoardVO> list = boardService.getList();
         model.addAttribute("list", list);
+    }
+
+    @GetMapping("/detail")
+    public void detail(Model model, @RequestParam("bno") long bno) {
+        BoardVO boardVO = boardService.getDetail(bno);
+        model.addAttribute("board", boardVO);
     }
 }
