@@ -21,7 +21,9 @@ public class BoardController {
 
     @PostMapping("/register")
     public String register(BoardVO boardVO){
-        log.info(">>> boardVO >> {}", boardVO);
+        int isOk = boardService.insert(boardVO);
+        log.info(">>> insert >> {}", (isOk > 0)? "ok" : "fail");
+
         return "index";
     }
 }
