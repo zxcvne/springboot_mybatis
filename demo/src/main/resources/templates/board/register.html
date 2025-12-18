@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th ="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<!--/* layout:decorate="~{붙일 레이아웃 경로} : 내 조각이 붙여질 위치"*/-->
+<div layout:fragment="content">
+    <div class="container-sm">
+        <h3>register page</h3>
+        <form action="/board/register" method="post">
+            <div class="mb-3">
+                <label for="t" class="form-label">Title</label>
+                <input type="text" name="title" class="form-control" id="t" placeholder="Title...">
+            </div>
+            <div class="mb-3">
+                <label for="w" class="form-label">Writer</label>
+                <input type="text" name="writer" class="form-control" id="w" placeholder="Writer...">
+            </div>
+            <div class="mb-3">
+                <label for="c" class="form-label">Content</label>
+                <textarea class="form-control" name="content" id="c" rows="5" cols="30" placeholder="Content..."></textarea>
+            </div>
+            <button class="btn btn-primary">register</button>
+        </form>
+    </div>
+</div>
