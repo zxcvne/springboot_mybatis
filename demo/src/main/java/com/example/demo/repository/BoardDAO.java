@@ -14,4 +14,8 @@ public interface BoardDAO {
     BoardVO getDetail(long bno);
 
     int getTotalCount(PagingVO pagingVO);
+
+    void update(BoardVO boardVO);
+
+    void delete(long bno);
 }

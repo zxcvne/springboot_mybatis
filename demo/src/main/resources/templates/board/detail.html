@@ -7,6 +7,8 @@
 <div layout:fragment="content">
     <div class="container-sm">
         <h3 class="font">[no.[[${board.bno}]]] detail page</h3>
+        <form action="/board/modify" method="post" id="modForm">
+        <input type="hidden" name="bno" th:value="${board.bno}">
             <div class="mb-3">
                 <label for="t" class="form-label">Title</label>
                 <input type="text" name="title" th:value="${board.title}" class="form-control" id="t" readonly>
@@ -23,7 +25,17 @@
                 <label for="c" class="form-label">Content</label>
                 <textarea class="form-control" name="content" id="c" rows="5" cols="30" readonly>[[${board.content}]]</textarea>
             </div>
-            <button class="btn btn-warning">modify</button>
-            <button class="btn btn-danger">delete</button>
+        </form>
+
+
+            <button class="btn btn-warning" id="modBtn">modify</button>
+<!--            <form  action="/board/delete" method="post">-->
+<!--                <input type="hidden" name="bno" th:value="${board.bno}">-->
+                <a th:href="@{/board/delete(bno=${board.bno})}"><button class="btn btn-danger" id="delBtn">delete</button></a>
+<!--            </form>-->
+
+
+
+        <script th:src="@{/js/boardModify.js}"></script>
     </div>
 </div>

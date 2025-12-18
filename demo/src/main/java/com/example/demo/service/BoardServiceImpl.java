@@ -35,5 +35,15 @@ public class BoardServiceImpl implements BoardService{
         return boardDAO.getTotalCount(pagingVO);
     }
 
+    @Override
+    public void update(BoardVO boardVO) {
+      boardDAO.update(boardVO);
+    }
+
+    @Override
+    public void delete(long bno) {
+        boardDAO.delete(bno);
+    }
+
 
 }
