@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.BoardVO;
+import com.example.demo.domain.PagingVO;
 import com.example.demo.repository.BoardDAO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,13 +21,18 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public List<BoardVO> getList() {
-        return boardDAO.getList();
+    public List<BoardVO> getList(PagingVO pagingVO) {
+        return boardDAO.getList(pagingVO);
     }
 
     @Override
     public BoardVO getDetail(long bno) {
         return boardDAO.getDetail(bno);
+    }
+
+    @Override
+    public int getTotalCount(PagingVO pagingVO) {
+        return boardDAO.getTotalCount(pagingVO);
     }
 
 

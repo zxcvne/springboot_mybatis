@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.BoardVO;
+import com.example.demo.domain.PagingVO;
+import com.example.demo.handler.PagingHandler;
 import com.example.demo.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,9 +31,12 @@ public class BoardController {
         return "redirect:/board/list";
     }
     @GetMapping("/list")
-    public void list(Model model) {
-        List<BoardVO> list = boardService.getList();
+    public void list(Model model, PagingVO pagingVO) {
+        List<BoardVO> list = boardService.getList(pagingVO);
+        int totalCount = boardService.getTotalCount(pagingVO);
+        PagingHandler ph = new PagingHandler(totalCount, pagingVO); // 검색어를 포함 (전체 페이지 개수)
         model.addAttribute("list", list);
+        model.addAttribute("ph", ph);
     }
 
     @GetMapping("/detail")

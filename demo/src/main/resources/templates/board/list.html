@@ -6,7 +6,33 @@
 <!--/* layout:decorate="~{붙일 레이아웃 경로} : 내 조각이 붙여질 위치"*/-->
 <div layout:fragment="content">
     <div class="container-sm">
-        <h3>list page</h3>
+        <h3 class="my-5">list page</h3>
+        [[${ph}]]
+        <!-- 검색 -->
+        <div class="container-fluid m-2">
+            <form class="d-flex" role="search" action="/board/list" method="get">
+                <select class="form-select" name="type" aria-label="Default select example">
+                    <option th:selected="${ph.pgvo.type eq null ? true : false}" >Choose...</option>
+                    <option value="t" th:selected="${ph.pgvo.type eq 't' ? true : false}" >title</option>
+                    <option value="w" th:selected="${ph.pgvo.type eq 'w' ? true : false}" >writer</option>
+                    <option value="c" th:selected="${ph.pgvo.type eq 'c' ? true : false}" >content</option>
+                    <option value="tc" th:selected="${ph.pgvo.type eq 'tc' ? true : false}" >title + content</option>
+                    <option value="wc" th:selected="${ph.pgvo.type eq 'wc' ? true : false}" >writer + content</option>
+                    <option value="tw" th:selected="${ph.pgvo.type eq 'tw' ? true : false}" >title + writer</option>
+                    <option value="twc" th:selected="${ph.pgvo.type eq 'twc' ? true : false}" >all</option>
+                </select>
+                <input class="form-control me-2" type="search" name="keyword" th:value="${ph.pgvo.keyword}" placeholder="Search" aria-label="Search" />
+                <input type="hidden" name="pageNo" th:value="1">
+                <input type="hidden" name="qty" th:value="${ph.pgvo.qty}">
+                <button type="submit" class="btn btn-success position-relative">
+                    Search
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
+                        [[${ph.totalCount}]]
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+                </button>
+            </form>
+        </div>
         <table class="table">
             <thead>
             <tr>
@@ -27,5 +53,25 @@
             </tr>
             </tbody>
         </table>
+        <!-- 페이지네이션 -->
+        <!-- th:cloassappend : 동적 클래스를 추가 방법 -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${ph.prev eq false ? 'disabled' : ''}">
+                    <a class="page-link" th:href="@{/board/list(pageNo=${ph.startPage}-1, qty=${ph.pgvo.qty}, type=${ph.pgvo.type}, keyword=${ph.pgvo.keyword})}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <!--/* th:each begin end 옵션이 없음. ${#numbers.sequence(from,to)}*/-->
+                <th:block th:each="i:${#numbers.sequence(ph.startPage, ph.endPage)}">
+                    <li class="page-item"><a class="page-link" th:href="@{/board/list(pageNo=${i}, qty=${ph.pgvo.qty}, type=${ph.pgvo.type}, keyword=${ph.pgvo.keyword})}">[[${i}]]</a></li>
+                </th:block>
+                <li class="page-item" th:classappend="${ph.next eq false ? 'disabled' : ''}">
+                    <a class="page-link" th:href="@{/board/list(pageNo=${ph.endPage}+1, qty=${ph.pgvo.qty}, type=${ph.pgvo.type}, keyword=${ph.pgvo.keyword})}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </div>
