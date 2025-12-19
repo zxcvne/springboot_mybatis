@@ -27,6 +27,7 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public BoardVO getDetail(long bno) {
+        boardDAO.readCountUpdate(bno, 1);
         return boardDAO.getDetail(bno);
     }
 
@@ -37,7 +38,8 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public void update(BoardVO boardVO) {
-      boardDAO.update(boardVO);
+        boardDAO.readCountUpdate(boardVO.getBno(), -1);
+        boardDAO.update(boardVO);
     }
 
     @Override

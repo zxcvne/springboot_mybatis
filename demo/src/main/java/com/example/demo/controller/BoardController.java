@@ -59,7 +59,7 @@ public class BoardController {
 //    }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam("bno") long bno) {
+    public String remove(@RequestParam("bno") long bno) {
         boardService.delete(bno);
         return "redirect:/board/list";
     }

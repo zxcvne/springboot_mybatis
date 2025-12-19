@@ -18,4 +18,6 @@ public interface BoardDAO {
     void update(BoardVO boardVO);
 
     void delete(long bno);
+
+    void readCountUpdate(long bno, int i);
 }

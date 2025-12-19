@@ -29,6 +29,10 @@
         update board set is_del = 'Y'
         where bno=#{bno}
     </update>
+    <update id="readCountUpdate">
+        update board set read_count = read_count + #{i}
+        where bno = #{bno}
+    </update>
 
     <sql id="search">
         <if test="type != null">
