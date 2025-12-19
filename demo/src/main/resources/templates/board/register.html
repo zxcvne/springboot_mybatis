@@ -14,7 +14,8 @@
             </div>
             <div class="mb-3">
                 <label for="w" class="form-label">Writer</label>
-                <input type="text" name="writer" class="form-control" id="w" placeholder="Writer...">
+                <input type="text" name="writer" th:value="${#authentication.getPrincipal().userVO.nickName}"
+                       class="form-control" id="w" readonly>
             </div>
             <div class="mb-3">
                 <label for="c" class="form-label">Content</label>

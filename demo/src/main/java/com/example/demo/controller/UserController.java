@@ -31,7 +31,7 @@ public class UserController {
         userVO.setPwd(passwordEncoder.encode(userVO.getPwd()));
         userService.insert(userVO);
 
-        return "redirect:/user/login";
+        return "redirect:/";
     }
 
 }

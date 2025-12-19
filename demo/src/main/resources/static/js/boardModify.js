@@ -8,6 +8,7 @@ document.getElementById("modBtn").addEventListener("click", () => {
   // modify, delete 버튼 삭제]
   document.getElementById("modBtn").remove();
   document.getElementById("delBtn").remove();
+  document.getElementById('listBtn').remove();
 
   // update할 버튼을 regBtn 이름으로 생성
   // <button type="submit" class="btn btn-success" id="regBtn">update</button>

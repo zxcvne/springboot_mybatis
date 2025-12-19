@@ -2,6 +2,7 @@
 <html lang="en"
       xmlns:th ="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layout/layout}">
 <!--/* layout:decorate="~{붙일 레이아웃 경로} : 내 조각이 붙여질 위치"*/-->
 <div layout:fragment="content">
@@ -27,15 +28,16 @@
             </div>
         </form>
 
-
-            <button class="btn btn-warning" id="modBtn">modify</button>
-<!--            <form  action="/board/delete" method="post">-->
-<!--                <input type="hidden" name="bno" th:value="${board.bno}">-->
-                <a th:href="@{/board/delete(bno=${board.bno})}"><button class="btn btn-danger" id="delBtn">delete</button></a>
-<!--            </form>-->
-
-
-
+            <th:block sec:authorize="isAuthenticated()" th:with="auth=${#authentication.getPrincipal()}">
+                <th:block th:if="${auth.userVO.nickName eq board.writer}">
+                    <button class="btn btn-warning" id="modBtn">modify</button>
+                    <!--            <form  action="/board/delete" method="post">-->
+                    <!--                <input type="hidden" name="bno" th:value="${board.bno}">-->
+                    <a th:href="@{/board/delete(bno=${board.bno})}"><button class="btn btn-danger" id="delBtn">delete</button></a>
+                    <a th:href="@{/board/list}"><button class="btn btn-success" id="listBtn">list</button></a>
+                    <!--            </form>-->
+                </th:block>
+            </th:block>
         <script th:src="@{/js/boardModify.js}"></script>
     </div>
 </div>

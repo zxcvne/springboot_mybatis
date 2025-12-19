@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.RequestCache;
 
 @EnableWebSecurity
 @Configuration
@@ -24,12 +26,15 @@ public class SecurityConfig {
     /* SecurityFilterChain 객체 생성 */
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        HttpSessionRequestCache requestCache = new HttpSessionRequestCache();
         // 권한 검색시 ROLE_ 기본 앞에 설정되어 있음
         return http.csrf(csrf-> csrf.disable())
+                .requestCache(request -> request
+                        .requestCache(requestCache))
                 .authorizeHttpRequests(authrize ->
                         authrize.requestMatchers("/user/list").hasAnyRole("ADMIN")
-                                .requestMatchers("/", "/index", "/js/**", "/board/list",
-                                        "/board/detail", "/user/signup", "/user/login").permitAll()
+                                .requestMatchers("/", "/js/**", "/board/list","/board/detail",
+                                        "/user/signup", "/user/login").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(login->
@@ -44,7 +49,7 @@ public class SecurityConfig {
                         .logoutUrl("/user/logout")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
-                        .logoutSuccessUrl("/index")
+                        .logoutSuccessUrl("/")
                 ).build();
     }
     // userDetailsService : 로그인 객체를 DB에서 확인
