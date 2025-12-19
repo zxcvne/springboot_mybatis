@@ -1,6 +1,7 @@
 package com.example.demo.config;
 
-import git;
+
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 @EnableWebSecurity
