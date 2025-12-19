@@ -11,4 +11,10 @@
         insert into auth(email, auth)
         values(#{email}, 'ROLE_USER')
     </insert>
+    <select id="getUser" resultType="com.example.demo.domain.UserVO">
+        select * from user where email=#{email}
+    </select>
+    <select id="getUserAuth" resultType="com.example.demo.domain.AuthVO">
+        select * from auth where email=#{email}
+    </select>
 </mapper>
