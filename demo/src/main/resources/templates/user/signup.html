@@ -6,6 +6,21 @@
 <!--/* layout:decorate="~{붙일 레이아웃 경로} : 내 조각이 붙여질 위치"*/-->
 <div layout:fragment="content">
     <div class="container-sm">
-        <h3>signup page</h3>
+        <h3>User SignUp Page</h3>
+        <form action="/user/login" method="post">
+            <div class="mb-3">
+                <label for="e" class="form-label">Email</label>
+                <input type="text" class="form-control" id="e" name="email" placeholder="id@example.com... ">
+            </div>
+            <div class="mb-3">
+                <label for="p" class="form-label">Password</label>
+                <input type="password" class="form-control" id="p" name="pwd" placeholder="password... ">
+            </div>
+            <div class="mb-3">
+                <label for="n" class="form-label">Nickname</label>
+                <input type="text" class="form-control" id="n" name="nickName" placeholder="Nickname... ">
+            </div>
+            <button class="btn btn-primary">login</button>
+        </form>
     </div>
 </div>
