@@ -17,4 +17,19 @@
     <select id="getUserAuth" resultType="com.example.demo.domain.AuthVO">
         select * from auth where email=#{email}
     </select>
+    <update id="modifyNoPwd">
+        update user set nick_name = #{nickName} where email = #{email}
+    </update>
+    <update id="modify">
+        update user set nick_name = #{nickName}, pwd=#{pwd} where email=#{email}
+    </update>
+    <delete id="delete">
+        delete from user where email = #{email}
+    </delete>
+    <delete id="authDelete">
+        delete from auth where email = #{email}
+    </delete>
+    <select id="getList" resultType="com.example.demo.domain.UserVO">
+        select * from user order by reg_date desc
+    </select>
 </mapper>

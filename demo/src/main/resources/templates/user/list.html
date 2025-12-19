@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th ="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<!--/* layout:decorate="~{붙일 레이아웃 경로} : 내 조각이 붙여질 위치"*/-->
+<div layout:fragment="content">
+    <div class="container-sm">
+        <h3>User List Page</h3>
+        <div class="row justify-content-start">
+            <!-- 이 페이지는 ADMIN 로그인이 되어있어야지만 접근 할 수 있는 페이지 -->
+            <th:block th:each="user:${list}">
+                <div class="col mb-3">
+                    <div class="card" style="width: 18rem;">
+                        <img th:src="@{/image/dog.jpg}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <input type="hidden" class="form-control" name="email" th:value="${user.email}" readonly="readonly">
+                                <input type="text" class="form-control" name="nickName" th:value="${user.nickName}" readonly="readonly">
+                                <input type="password" class="form-control" name="pwd" placeholder="password..." readonly="readonly">
+                            </h5>
+                            <p class="card-text fw-bold">[[${user.email}]]</p>
+                            <p class="card-text">[[${user.regDate}]]</p>
+                            <p class="card-text"><small>Last login [[${user.lastLogin}]] ago</small></p>
+                            <!-- 권한 -->
+                            <p>
+                                    <span th:each="auths: ${user.authList}" class="badge text-bg-success">[[${auths.auth}]]</span>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th ="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout/layout}">
+<!--/* layout:decorate="~{붙일 레이아웃 경로} : 내 조각이 붙여질 위치"*/-->
+<div layout:fragment="content">
+    <div class="container-sm p-5">
+        <h3>User modify Page</h3>
+        <!-- 이 페이지는 로그인이 되어있어야지만 접근 할 수 있는 페이지 -->
+
+        <sec:authentication property="principal.userVO" var="user"/>
+        <form action="/user/modify" method="post">
+            <div class="card" style="width: 18rem;"
+            th:with="user=${#authentication.getPrincipal().userVO}">
+                <img th:src="@{/image/dog.jpg}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <input type="hidden" class="form-control" name="email" th:value="${user.email}">
+                        <input type="text" class="form-control" name="nickName" th:value="${user.nickName}">
+                        <input type="password" class="form-control" name="pwd" placeholder="password...">
+                    </h5>
+                    <p class="card-text fw-bold">[[${user.email}]]</p>
+                    <p class="card-text">[[${user.regDate}]]</p>
+                    <p class="card-text"><small>Last login [[${user.lastLogin}]] ago</small></p>
+
+                    <!-- 권한 -->
+                    <p>
+                        <span th:each="auths: ${user.authList}" class="badge text-bg-success">[[${auths.auth}]]</span>
+                    </p>
+
+                    <button type="submit" class="btn btn-primary btn-sm">modify</button>
+                    <a th:href="@{/user/remove}"><button type="button" class="btn btn-danger btn-sm">delete</button></a>
+                </div>
+            </div>
+        </form>
+    </div>
+<!--    <script type="text/javascript">-->
+<!--        const modify_msg = `<c:out value ="${modify_msg}" />`-->
+<!--        console.log(modify_msg);-->
+<!--        if(modify_msg==='fail'){-->
+<!--            alert("회원정보 수정실패!! 다시 시도해주세요.")-->
+<!--        }-->
+<!--    </script>-->
+</div>

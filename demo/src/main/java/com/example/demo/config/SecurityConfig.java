@@ -33,7 +33,7 @@ public class SecurityConfig {
                         .requestCache(requestCache))
                 .authorizeHttpRequests(authrize ->
                         authrize.requestMatchers("/user/list").hasAnyRole("ADMIN")
-                                .requestMatchers("/", "/js/**", "/board/list","/board/detail",
+                                .requestMatchers("/", "/js/**", "/image/**", "/board/list","/board/detail",
                                         "/user/signup", "/user/login").permitAll()
                                 .anyRequest().authenticated()
                 )

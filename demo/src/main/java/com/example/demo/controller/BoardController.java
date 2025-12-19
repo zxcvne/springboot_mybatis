@@ -4,6 +4,7 @@ import com.example.demo.domain.BoardVO;
 import com.example.demo.domain.PagingVO;
 import com.example.demo.handler.PagingHandler;
 import com.example.demo.service.BoardService;
+import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -63,6 +64,7 @@ public class BoardController {
         boardService.delete(bno);
         return "redirect:/board/list";
     }
+
 
 
 }

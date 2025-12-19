@@ -6,6 +6,8 @@ import com.example.demo.domain.PagingVO;
 import java.util.List;
 
 public interface BoardService {
+
+
     void insert(BoardVO boardVO);
 
     List<BoardVO> getList(PagingVO pagingVO);
